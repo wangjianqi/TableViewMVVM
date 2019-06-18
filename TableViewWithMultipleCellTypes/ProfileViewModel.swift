@@ -18,12 +18,16 @@ enum ProfileViewModelItemType {
 }
 
 protocol ProfileViewModelItem {
+    //类型
     var type: ProfileViewModelItemType { get }
+    ///section标题
     var sectionTitle: String { get }
+    //行数
     var rowCount: Int { get }
 }
 
 class ProfileViewModel: NSObject {
+    ///数据源
     var items = [ProfileViewModelItem]()
     
     override init() {
@@ -37,11 +41,13 @@ class ProfileViewModel: NSObject {
             items.append(nameAndPictureItem)
         }
         
+        //关于
         if let about = profile.about {
             let aboutItem = ProfileViewModelAboutItem(about: about)
             items.append(aboutItem)
         }
         
+        //
         if let email = profile.email {
             let dobItem = ProfileViewModelEmailItem(email: email)
             items.append(dobItem)
@@ -61,6 +67,7 @@ class ProfileViewModel: NSObject {
     }
 }
 
+//实现DataSource
 extension ProfileViewModel: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return items.count
@@ -105,6 +112,13 @@ extension ProfileViewModel: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return items[section].sectionTitle
+    }
+}
+
+extension ProfileViewModel: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        print("row = \(indexPath.row)")
     }
 }
 

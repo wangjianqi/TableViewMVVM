@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tableView?.dataSource = viewModel
+        tableView?.delegate = viewModel
         
         tableView?.estimatedRowHeight = 100
         tableView?.rowHeight = UITableViewAutomaticDimension
