@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+/// 类型
 enum ProfileViewModelItemType {
     case nameAndPicture
     case about
@@ -22,12 +22,12 @@ protocol ProfileViewModelItem {
     var type: ProfileViewModelItemType { get }
     ///section标题
     var sectionTitle: String { get }
-    //行数
+    /// 行数
     var rowCount: Int { get }
 }
 
 class ProfileViewModel: NSObject {
-    ///数据源
+    ///数据源： 类型ProfileViewModelItem
     var items = [ProfileViewModelItem]()
     
     override init() {
@@ -69,10 +69,12 @@ class ProfileViewModel: NSObject {
 
 //实现DataSource
 extension ProfileViewModel: UITableViewDataSource {
+    /// section的个数
     func numberOfSections(in tableView: UITableView) -> Int {
         return items.count
     }
-    
+
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items[section].rowCount
     }

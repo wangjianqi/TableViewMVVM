@@ -41,6 +41,7 @@ class NamePictureCell: UITableViewCell {
         pictureImageView?.backgroundColor = UIColor.lightGray
     }
 
+    /// 复用
     override func prepareForReuse() {
         super.prepareForReuse()
         
